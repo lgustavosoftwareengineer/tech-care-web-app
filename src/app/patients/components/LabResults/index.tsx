@@ -15,7 +15,7 @@ export function LabResults() {
   const { lab_results } = currentPatient;
 
   return (
-    <Card className="rounded-2xl p-5">
+    <Card className="rounded-2xl h-[296px] p-5">
       <div className="flex justify-between items-start">
         <h2 className="text-2xl font-extrabold mb-4">Lab Results</h2>
       </div>
@@ -55,7 +55,7 @@ const ListContainer = ({
   return (
     <ul
       className={twMerge(
-        "flex flex-col gap-[5px] overflow-y-auto h-[296px] mr-1",
+        "flex flex-col gap-[5px] overflow-y-auto max-h-[200px] mr-1",
         className
       )}
     >
