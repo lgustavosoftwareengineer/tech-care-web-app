@@ -6,11 +6,11 @@ import { twMerge } from "tailwind-merge";
 
 import MoreHorizontalIcon from "assets/icons/MoreHorizontal.svg";
 import SearchIcon from "assets/icons/Search.svg";
-import { Patient } from "@/app/types";
 
 import { Loading, Card } from "@/app/components";
 
 import { usePatient } from "@/app/patients/hooks";
+import { Patient } from "@/app/types";
 
 type PatientsProps = {
   patients: Patient[];
@@ -54,39 +54,9 @@ const PatientsList = ({ patients }: PatientsListProps) => {
 
   return (
     <ListContainer>
-      {patients.map((patient, index) => {
-        const isPatientSelected = patient.name === currentPatient.name;
-
-        return (
-          <div
-            key={index}
-            className={twMerge(
-              "flex justify-between items-center px-5 py-4 hover:cursor-pointer",
-              isPatientSelected && "bg-primary-light"
-            )}
-            onClick={() => setCurrentPatient(patient)}
-          >
-            <div className="flex gap-3">
-              <Image
-                src={patient.profile_picture}
-                height={48}
-                width={48}
-                alt="Patient profile picture"
-                className="size-[48px] rounded-full"
-              />
-              <div className="flex flex-col gap-1 text-sm">
-                <span className="font-bold">{patient.name}</span>
-                <span>
-                  {patient.gender}, {patient.age}
-                </span>
-              </div>
-            </div>
-            <button>
-              <Image src={MoreHorizontalIcon} alt="More user data button" />
-            </button>
-          </div>
-        );
-      })}
+      {patients.map((patient) => (
+        <PatientElement key={patient.name} {...patient} />
+      ))}
     </ListContainer>
   );
 };
@@ -106,5 +76,40 @@ const ListContainer = ({
     >
       {children}
     </ul>
+  );
+};
+
+const PatientElement = (patient: Patient) => {
+  const { currentPatient, setCurrentPatient } = usePatient();
+
+  const isPatientSelected = patient.name === currentPatient.name;
+
+  return (
+    <div
+      className={twMerge(
+        "flex justify-between items-center px-5 py-4 hover:cursor-pointer",
+        isPatientSelected && "bg-primary-light"
+      )}
+      onClick={() => setCurrentPatient(patient)}
+    >
+      <div className="flex gap-3">
+        <Image
+          src={patient.profile_picture}
+          height={48}
+          width={48}
+          alt="Patient profile picture"
+          className="size-[48px] rounded-full"
+        />
+        <div className="flex flex-col gap-1 text-sm">
+          <span className="font-bold">{patient.name}</span>
+          <span className="text-gray-dark">
+            {patient.gender}, {patient.age}
+          </span>
+        </div>
+      </div>
+      <button>
+        <Image src={MoreHorizontalIcon} alt="More user data button" />
+      </button>
+    </div>
   );
 };
