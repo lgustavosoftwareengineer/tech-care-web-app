@@ -98,7 +98,7 @@ const PatientElement = (patient: Patient) => {
           height={48}
           width={48}
           alt="Patient profile picture"
-          className="size-[48px] rounded-full"
+          className="rounded-full"
         />
         <div className="flex flex-col gap-1 text-sm">
           <span className="font-bold">{patient.name}</span>
