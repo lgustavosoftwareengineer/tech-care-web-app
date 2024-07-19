@@ -1,4 +1,3 @@
-import { Patient } from "@/app/types";
 import { create } from "zustand";
 
 type State = {
