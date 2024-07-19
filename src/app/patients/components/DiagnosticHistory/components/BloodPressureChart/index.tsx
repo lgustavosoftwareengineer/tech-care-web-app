@@ -1,4 +1,3 @@
-import React from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -9,12 +8,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  CoreChartOptions,
-  ElementChartOptions,
-  PluginChartOptions,
-  DatasetChartOptions,
-  ScaleChartOptions,
-  LineControllerChartOptions,
   ChartOptions,
   ChartData,
 } from "chart.js";
