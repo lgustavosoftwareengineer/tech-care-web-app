@@ -85,7 +85,7 @@ const PatientElement = (patient: Patient) => {
   const isPatientSelected = patient.name === currentPatient.name;
 
   return (
-    <div
+    <li
       className={twMerge(
         "flex justify-between items-center px-5 py-4 hover:cursor-pointer",
         isPatientSelected && "bg-primary-light"
@@ -110,6 +110,6 @@ const PatientElement = (patient: Patient) => {
       <button>
         <Image src={MoreHorizontalIcon} alt="More user data button" />
       </button>
-    </div>
+    </li>
   );
 };
