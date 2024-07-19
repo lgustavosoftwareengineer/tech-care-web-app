@@ -62,11 +62,11 @@ export function BloodPressureChart({
         borderColor: "rgba(230, 111, 210, 1)",
         backgroundColor: "rgba(230, 111, 210, 0.2)",
         fill: true,
-        pointStyle: "circle", // You can change this to 'rect', 'triangle', 'star', etc.
+        pointStyle: "circle",
         pointRadius: 5,
         pointBackgroundColor: "rgba(230, 111, 210, 1)",
         pointBorderColor: "rgba(230, 111, 210, 1)",
-        tension: 0.4, // Ajuste a curvatura da linha
+        tension: 0.4,
       },
       {
         label: "Diastolic Pressure",
@@ -74,11 +74,11 @@ export function BloodPressureChart({
         borderColor: "rgba(140, 111, 230, 1)",
         backgroundColor: "rgba(140, 111, 230, 0.2)",
         fill: true,
-        pointStyle: "circle", // You can change this to 'rect', 'triangle', 'star', etc.
+        pointStyle: "circle",
         pointRadius: 5,
         pointBackgroundColor: "rgba(140, 111, 230, 1)",
         pointBorderColor: "rgba(140, 111, 230, 1)",
-        tension: 0.4, // Ajuste a curvatura da linha
+        tension: 0.4,
       },
     ],
   };
