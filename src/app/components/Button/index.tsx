@@ -13,7 +13,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const variantClasses: Record<ButtonVariant, string> = {
-    default: "bg-primary rounded-[41px] hover:bg-opacity-30",
+    default: "bg-primary-dark rounded-[41px] hover:bg-opacity-30",
     text: "hover:bg-gray-light",
   };
 

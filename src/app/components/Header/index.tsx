@@ -9,7 +9,8 @@ import CalendarIcon from "assets/icons/Calendar.svg";
 import ChatBubbleIcon from "assets/icons/ChatBubble.svg";
 import CreditCardIcon from "assets/icons/CreditCard.svg";
 
-import { Card } from "../Card";
+import { Card } from "@/app/components/Card";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";

@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --black: theme(colors.black);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 100px;
+  border-radius: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e3e4e6;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--black);
+
+  height: 10px;
+  border-radius: 3px;
+}
