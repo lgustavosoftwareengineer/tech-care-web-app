@@ -1,24 +1,21 @@
 "use client";
 
+import { useState } from "react";
 import { Card } from "@/app/components/Card";
-import { BloodPressureChart } from "./components";
+
+import { usePatient, usePatientChart } from "@/app/patients/hooks";
+
 import {
-  usePatient,
-  usePatientAverages,
-  usePatientsAverages,
-} from "../../hooks";
-import { useEffect, useState } from "react";
-
-import { PATIENTS } from "@/app/mocked-data/patients";
-import { BloodPressureAverageSection } from "./components/BloodPressureAverageSection";
-
-import { HealthStatusAverageItem } from "./components/HealthStatusAverageItem";
+  BloodPressureAverageSection,
+  HealthStatusAverageItem,
+  BloodPressureChart,
+} from "./components";
 
 export function DiagnosticHistory() {
   const { currentPatient } = usePatient();
   const diagnosisHistory = currentPatient.diagnosis_history;
 
-  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const { setSelectedYear, selectedYear } = usePatientChart();
 
   const years = Array.from(
     new Set(diagnosisHistory.map((record) => record.year))
@@ -27,16 +24,6 @@ export function DiagnosticHistory() {
   const filteredDiagnosisHistory = selectedYear
     ? diagnosisHistory.filter((record) => record.year === selectedYear)
     : diagnosisHistory;
-
-  const patientAverages = usePatientsAverages(PATIENTS);
-
-  const patientAverage = usePatientAverages(currentPatient);
-
-  useEffect(() => {
-    console.log("Patients averages", patientAverages);
-
-    console.log("Patient averages", patientAverage);
-  }, [patientAverage, patientAverages]);
 
   return (
     <Card className="rounded-2xl p-5">

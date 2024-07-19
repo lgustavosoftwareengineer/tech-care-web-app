@@ -9,7 +9,7 @@ import SearchIcon from "assets/icons/Search.svg";
 
 import { Loading, Card } from "@/app/components";
 
-import { usePatient } from "@/app/patients/hooks";
+import { usePatient, usePatientChart } from "@/app/patients/hooks";
 import { Patient } from "@/app/types";
 
 type PatientsProps = {
@@ -81,8 +81,16 @@ const ListContainer = ({
 
 const PatientElement = (patient: Patient) => {
   const { currentPatient, setCurrentPatient } = usePatient();
+  const { setSelectedYear } = usePatientChart();
 
   const isPatientSelected = patient.name === currentPatient.name;
+
+  const onSetCurrentPatient = (patient: Patient) => {
+    return () => {
+      setCurrentPatient(patient);
+      setSelectedYear(undefined);
+    };
+  };
 
   return (
     <li
@@ -90,7 +98,7 @@ const PatientElement = (patient: Patient) => {
         "flex justify-between items-center px-5 py-4 hover:cursor-pointer",
         isPatientSelected && "bg-primary-light"
       )}
-      onClick={() => setCurrentPatient(patient)}
+      onClick={onSetCurrentPatient(patient)}
     >
       <div className="flex gap-3">
         <Image
