@@ -18,7 +18,7 @@ const fetchPatients = async () => {
 
 export function useFetchPatients() {
   const {
-    data: patients,
+    data: patients = [],
     isLoading,
     error,
   } = useSWR<Patient[]>("fetch-patients", fetchPatients);

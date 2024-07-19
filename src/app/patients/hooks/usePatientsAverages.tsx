@@ -11,6 +11,16 @@ export function usePatientsAverages(patients: Patient[]): Averages {
     let totalTemperature = 0;
     let count = 0;
 
+    if (!patients.length) {
+      return {
+        avgSystolic: 0,
+        avgDiastolic: 0,
+        avgHeartRate: 0,
+        avgRespiratoryRate: 0,
+        avgTemperature: 0,
+      };
+    }
+
     patients.forEach((patient) => {
       patient.diagnosis_history.forEach((record) => {
         totalSystolic += record.blood_pressure.systolic.value;

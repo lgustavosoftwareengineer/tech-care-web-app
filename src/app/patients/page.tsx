@@ -21,6 +21,19 @@ export default function Home() {
     );
   }
 
+  if (!patients.length) {
+    return (
+      <section className="flex justify-center items-center h-screen">
+        <div className="flex flex-col">
+          <h2 className="text-3xl font-bold text-center mb-6">Ops!</h2>
+          <h2 className="text-2xl font-bold text-center mb-6">
+            In the moment does not exist patients to show
+          </h2>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="grid grid-cols-12 gap-8">
       <div className="col-span-3">
