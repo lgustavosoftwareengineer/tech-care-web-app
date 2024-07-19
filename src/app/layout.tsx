@@ -1,8 +1,10 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
+import { Header } from "./components";
 
-const inter = Inter({ subsets: ["latin"] });
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={`${manrope.className} bg-background min-h-screen p-[18px] `}
+      >
+        <Header />
+        <>{children}</>
+      </body>
     </html>
   );
 }
