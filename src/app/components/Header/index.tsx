@@ -56,7 +56,14 @@ const Tabs: Tab[] = [
 export function Header() {
   return (
     <Card className="px-8 py-3 rounded-full mb-8 flex flex-row justify-between">
-      <Image src={LogoIcon} alt="Logo" />
+      <Image
+        src={LogoIcon}
+        alt="Logo"
+        width="0"
+        height="0"
+        className="w-auto h-[48px]"
+        priority
+      />
 
       <div className="flex flex-row gap-10">
         {Tabs.map((tab, index) => (
@@ -92,8 +99,9 @@ const PhysicianDetails = () => {
         <Image
           src={SeniorWomanDoctorImagePNG}
           alt="Physician Image"
-          height={44}
-          width={44}
+          width="0"
+          height="0"
+          className="w-auto size-[44px]"
         />
         <div className="flex flex-col gap-1 text-sm text-black">
           <span className="font-bold">Dr. Jose Simmons</span>
