@@ -23,7 +23,7 @@ export function PatientDetails() {
   }
 
   return (
-    <Card className="rounded-2xl p-5">
+    <Card className="rounded-2xl py-8 px-5">
       <div className="mb-8 flex flex-col items-center">
         <Image
           src={currentPatient.profile_picture}
