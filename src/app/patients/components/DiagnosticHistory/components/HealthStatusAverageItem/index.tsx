@@ -3,8 +3,8 @@ import { twJoin } from "tailwind-merge";
 
 import Image from "next/image";
 
-import { PATIENTS } from "@/app/mocked-data/patients";
 import {
+  useFetchPatients,
   usePatient,
   usePatientAverages,
   usePatientsAverages,
@@ -23,8 +23,9 @@ export const HealthStatusAverageItem = ({
   type,
 }: HealthStatusAverageItemProps) => {
   const { currentPatient } = usePatient();
+  const { patients } = useFetchPatients();
 
-  const patientsAverages = usePatientsAverages(PATIENTS);
+  const patientsAverages = usePatientsAverages(patients);
   const patientAverage = usePatientAverages(currentPatient);
 
   const color: Record<HealthStatusAverageItemProps["type"], string> = {

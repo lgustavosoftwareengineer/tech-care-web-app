@@ -1,4 +1,5 @@
-import { PATIENTS } from "../mocked-data/patients";
+"use client";
+
 import {
   DiagnosticHistory,
   DiagnosticList,
@@ -6,12 +7,24 @@ import {
   PatientDetails,
   Patients,
 } from "../patients/components";
+import { useFetchPatients } from "./hooks";
+import { Loading } from "../components";
 
 export default function Home() {
+  const { patients, isLoading } = useFetchPatients();
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center">
+        <Loading showText />
+      </div>
+    );
+  }
+
   return (
-    <section className="grid grid-cols-12 gap-8 h-[100%]">
+    <section className="grid grid-cols-12 gap-8">
       <div className="col-span-3">
-        <Patients patients={PATIENTS} />
+        <Patients patients={patients} />
       </div>
       <div className="flex flex-col col-span-6 gap-8">
         <DiagnosticHistory />

@@ -6,7 +6,6 @@ import { twMerge } from "tailwind-merge";
 import { Loading } from "@/app/components";
 import { Card } from "@/app/components/Card";
 import { usePatient } from "@/app/patients/hooks";
-
 import { Diagnostic } from "@/app/types";
 
 export function DiagnosticList() {

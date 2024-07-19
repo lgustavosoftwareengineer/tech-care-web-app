@@ -1,5 +1,5 @@
-import { PATIENTS } from "@/app/mocked-data/patients";
 import {
+  useFetchPatients,
   usePatient,
   usePatientAverages,
   usePatientsAverages,
@@ -10,6 +10,7 @@ import { twJoin } from "tailwind-merge";
 
 import { useMemo } from "react";
 import Image from "next/image";
+import { Patient } from "@/app/types";
 
 export function BloodPressureAverageSection() {
   return (
@@ -26,8 +27,9 @@ type BloodPressureAverageItem = {
 };
 const BloodPressureAverageItem = ({ type }: BloodPressureAverageItem) => {
   const { currentPatient } = usePatient();
+  const { patients } = useFetchPatients();
 
-  const patientsAverages = usePatientsAverages(PATIENTS);
+  const patientsAverages = usePatientsAverages(patients);
   const patientAverage = usePatientAverages(currentPatient);
 
   const colors: Record<BloodPressureAverageItem["type"], string> = {
