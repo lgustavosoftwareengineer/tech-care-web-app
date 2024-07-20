@@ -103,13 +103,13 @@ const PhysicianDetails = () => {
           height="0"
           className="w-auto size-[44px]"
         />
-        <div className="flex flex-col gap-1 text-sm text-black">
+        <div className="flex flex-col text-sm text-black">
           <span className="font-bold">Dr. Jose Simmons</span>
           <span className="text-gray-dark">General Practitioner</span>
         </div>
       </div>
 
-      <div className="border-[1px] border-[#EDEDED]"></div>
+      <div className="border-[1px] border-gray-medium"></div>
 
       <div className="flex gap-3">
         <button>

@@ -1,14 +1,15 @@
 "use client";
 
+import { Loading } from "../components";
+
 import {
   DiagnosticHistory,
   DiagnosticList,
   LabResults,
   PatientDetails,
   Patients,
-} from "../patients/components";
+} from "./components";
 import { useFetchPatients } from "./hooks";
-import { Loading } from "../components";
 
 export default function Home() {
   const { patients, isLoading } = useFetchPatients();

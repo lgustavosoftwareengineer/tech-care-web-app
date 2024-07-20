@@ -9,7 +9,7 @@ type Actions = {
   setCurrentPatient: (patient: Patient) => void;
 };
 
-type UserStore = State & Actions;
+type PatientStore = State & Actions;
 
 const INITIAL_STATE: Patient = {
   name: "",
@@ -58,7 +58,7 @@ const INITIAL_STATE: Patient = {
   lab_results: [""],
 };
 
-export const usePatient = create<UserStore, any>((set) => ({
+export const usePatient = create<PatientStore, any>((set) => ({
   currentPatient: INITIAL_STATE,
   setCurrentPatient: (currentPatient) => set(() => ({ currentPatient })),
 }));

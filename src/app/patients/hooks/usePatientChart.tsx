@@ -8,9 +8,9 @@ type Actions = {
   setSelectedYear: (selectedYear?: number) => void;
 };
 
-type UserStore = State & Actions;
+type PatientChartStore = State & Actions;
 
-export const usePatientChart = create<UserStore, any>((set) => ({
+export const usePatientChart = create<PatientChartStore, any>((set) => ({
   selectedYear: undefined,
   setSelectedYear: (selectedYear) => set(() => ({ selectedYear })),
 }));

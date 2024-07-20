@@ -11,6 +11,8 @@ import {
   ChartOptions,
   ChartData,
 } from "chart.js";
+import { DiagnosisHistory } from "@/app/types";
+import { useMemo } from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -22,79 +24,86 @@ ChartJS.register(
   Legend
 );
 
-type BloodPressure = {
-  value: number;
-  levels: string;
-};
-
-type DiagnosisHistoryItem = {
-  month: string;
-  year: number;
-  blood_pressure: {
-    systolic: BloodPressure;
-    diastolic: BloodPressure;
-  };
-};
-
 type BloodPressureChartProps = {
-  diagnosisHistory: DiagnosisHistoryItem[];
+  diagnosisHistory: DiagnosisHistory[];
+};
+
+const SYSTOLIC_DATA_OPTIONS = {
+  color: "#E66FD2",
+};
+
+const DIASTOLIC_DATA_OPTIONS = {
+  color: "#8C6FE6",
+};
+
+const DEFAULT_DATA_OPTIONS = {
+  fill: true,
+  pointStyle: "circle",
+  pointRadius: 5,
+  tension: 0.4,
+};
+
+const CHART_OPTIONS: ChartOptions<"line"> = {
+  responsive: true,
+  plugins: {
+    legend: {
+      display: false,
+    },
+    title: {
+      display: false,
+    },
+  },
 };
 
 export function BloodPressureChart({
   diagnosisHistory,
 }: BloodPressureChartProps) {
-  const months = diagnosisHistory.map(
-    (record) => `${record.month.slice(0, 3)}, ${record.year}`
-  );
-  const systolicValues = diagnosisHistory.map(
-    (record) => record.blood_pressure.systolic.value
-  );
-  const diastolicValues = diagnosisHistory.map(
-    (record) => record.blood_pressure.diastolic.value
+  const months = useMemo(
+    () =>
+      diagnosisHistory.map(
+        (record) => `${record.month.slice(0, 3)}, ${record.year}`
+      ),
+    [diagnosisHistory]
   );
 
-  const data: ChartData<"line"> = {
-    labels: months,
-    datasets: [
-      {
-        label: "Systolic Pressure",
-        data: systolicValues,
-        borderColor: "rgba(230, 111, 210, 1)",
-        backgroundColor: "rgba(230, 111, 210, 0.2)",
-        fill: true,
-        pointStyle: "circle",
-        pointRadius: 5,
-        pointBackgroundColor: "rgba(230, 111, 210, 1)",
-        pointBorderColor: "rgba(230, 111, 210, 1)",
-        tension: 0.4,
-      },
-      {
-        label: "Diastolic Pressure",
-        data: diastolicValues,
-        borderColor: "rgba(140, 111, 230, 1)",
-        backgroundColor: "rgba(140, 111, 230, 0.2)",
-        fill: true,
-        pointStyle: "circle",
-        pointRadius: 5,
-        pointBackgroundColor: "rgba(140, 111, 230, 1)",
-        pointBorderColor: "rgba(140, 111, 230, 1)",
-        tension: 0.4,
-      },
-    ],
-  };
+  const systolicValues = useMemo(
+    () =>
+      diagnosisHistory.map((record) => record.blood_pressure.systolic.value),
+    [diagnosisHistory]
+  );
 
-  const options: ChartOptions<"line"> = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
-      title: {
-        display: false,
-        text: "Blood Pressure Over the Year",
-      },
-    },
-  };
+  const diastolicValues = useMemo(
+    () =>
+      diagnosisHistory.map((record) => record.blood_pressure.diastolic.value),
+    [diagnosisHistory]
+  );
 
-  return <Line data={data} options={options} />;
+  const data: ChartData<"line"> = useMemo<ChartData<"line">>(
+    () => ({
+      labels: months,
+      datasets: [
+        {
+          label: "Systolic Pressure",
+          data: systolicValues,
+          borderColor: SYSTOLIC_DATA_OPTIONS.color,
+          backgroundColor: SYSTOLIC_DATA_OPTIONS.color,
+          pointBackgroundColor: SYSTOLIC_DATA_OPTIONS.color,
+          pointBorderColor: SYSTOLIC_DATA_OPTIONS.color,
+          ...DEFAULT_DATA_OPTIONS,
+        },
+        {
+          label: "Diastolic Pressure",
+          data: diastolicValues,
+          borderColor: DIASTOLIC_DATA_OPTIONS.color,
+          backgroundColor: DIASTOLIC_DATA_OPTIONS.color,
+          pointBackgroundColor: DIASTOLIC_DATA_OPTIONS.color,
+          pointBorderColor: DIASTOLIC_DATA_OPTIONS.color,
+          ...DEFAULT_DATA_OPTIONS,
+        },
+      ],
+    }),
+    [diastolicValues, months, systolicValues]
+  );
+
+  return <Line data={data} options={CHART_OPTIONS} />;
 }

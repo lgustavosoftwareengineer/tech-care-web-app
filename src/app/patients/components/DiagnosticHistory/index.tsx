@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { Card } from "@/app/components/Card";
+import { useMemo } from "react";
 
+import { Card } from "@/app/components/Card";
 import { usePatient, usePatientChart } from "@/app/patients/hooks";
 
 import {
@@ -17,13 +17,18 @@ export function DiagnosticHistory() {
 
   const { setSelectedYear, selectedYear } = usePatientChart();
 
-  const years = Array.from(
-    new Set(diagnosisHistory.map((record) => record.year))
+  const years = useMemo(
+    () => Array.from(new Set(diagnosisHistory.map((record) => record.year))),
+    [diagnosisHistory]
   );
 
-  const filteredDiagnosisHistory = selectedYear
-    ? diagnosisHistory.filter((record) => record.year === selectedYear)
-    : diagnosisHistory;
+  const filteredDiagnosisHistory = useMemo(
+    () =>
+      selectedYear
+        ? diagnosisHistory.filter((record) => record.year === selectedYear)
+        : diagnosisHistory,
+    [diagnosisHistory, selectedYear]
+  );
 
   return (
     <Card className="rounded-2xl p-5">
@@ -32,8 +37,7 @@ export function DiagnosticHistory() {
           <div className="flex justify-between">
             <h2 className="font-bold text-lg">Blood Pressure</h2>
             <select
-              id="year-select"
-              className="bg-purple-light"
+              className="bg-purple-light font-sans text-sm hover:cursor-pointer"
               value={selectedYear || ""}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
             >

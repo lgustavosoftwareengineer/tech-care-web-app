@@ -4,12 +4,12 @@ import Image from "next/image";
 
 import { Button, Card, Loading } from "@/app/components";
 import { usePatient } from "@/app/patients/hooks";
+import { formatDate } from "@/app/utils";
 
 import BirthIcon from "assets/icons/Birth.svg";
 import GenderIcon from "assets/icons/Female.svg";
 import PhoneIcon from "assets/icons/Phone.svg";
 import InsuranceIcon from "assets/icons/Insurance.svg";
-import { formatDate } from "@/app/utils";
 
 export function PatientDetails() {
   const { currentPatient } = usePatient();
