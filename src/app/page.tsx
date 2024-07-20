@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { twMerge } from "tailwind-merge";
 import { Button } from "./components/Button";
 
 export default function Home() {
